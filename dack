@@ -1,0 +1,114 @@
+# include <iostream>
+# include <string>
+# include <algorithm>
+# include <cmath>
+# include <vector>
+
+using namespace std;
+
+struct Stack {
+    int siz = 0;
+    int a[400000], maxx[400000];
+    void push_back(int x) {
+        a[siz] = x;
+        siz++;
+        cout<<"ok"<<"\n";
+    }
+    void push_front(int x) {
+        siz++;
+        for (int i=siz-1; i>0;i--){
+            a[i]=a[i-1];
+        }
+        a[0]=x;
+        cout<<"ok"<<"\n";
+    }
+    void pop_front() {
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[0]<<"\n";
+            for(int i=0; i<siz-1;i++){
+                a[i]=a[i+1];
+            }
+            siz--;
+        }
+    }
+    void pop_back() {
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[siz-1]<<"\n";
+            siz--;
+        }
+    }
+    int size(){
+        cout<<siz<<"\n";
+        return siz;
+    }
+    void front(){
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[0]<<"\n";
+        }
+    }
+    void back(){
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[siz-1]<<"\n";
+        }
+    }
+    void clear(){
+        siz=0;
+        cout<<"ok"<<"\n";
+    }
+    void exit(){
+        cout<<"bye"<<"\n";
+    }
+    
+};
+int main(){
+    Stack st;
+    string type;
+    while (type!="exit"){
+        cin>>type;
+        if (type=="push_back"){
+            int value;
+            cin>>value;
+            st.push_back(value);
+        }
+        else if (type=="push_front"){
+            int value;
+            cin>>value;
+            st.push_front(value);
+        }
+        else if (type=="pop_front"){
+            st.pop_front();
+        }
+        else if (type=="pop_back"){
+            st.pop_back();
+        }
+        else if (type=="front"){
+            st.front();
+        }
+        else if (type=="back"){
+            st.back();
+        }
+        else if (type=="size"){
+            st.size();
+        }
+        else if (type=="clear"){
+            st.clear();
+        }
+        else if (type=="exit"){
+            st.exit();
+            break;
+        }
+    }
+    return 0;
+}
