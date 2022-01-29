@@ -1,0 +1,95 @@
+# include <iostream>
+# include <string>
+# include <algorithm>
+# include <cmath>
+
+using namespace std;
+
+struct Stack {
+    int siz = 0;
+    int a[400000], maxx[400000];
+    void push(int x) {
+        maxx[siz] = x;
+        if (siz) {
+            maxx[siz] = std::max(maxx[siz], maxx[siz - 1]);
+        }
+        a[siz] = x;
+        siz++;
+        cout<<"ok"<<"\n";
+    }
+    void pop() {
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[0]<<"\n";
+            for(int i=0; i<siz;i++){
+                a[i]=a[i+1];
+            }
+            siz--;
+        }
+    }
+    int max(){
+        if (siz < 1) {
+            throw std::runtime_error("Stack is empty");
+        }
+        return maxx[siz - 1];
+    }
+    int size(){
+        cout<<siz<<"\n";
+        return siz;
+    }
+    void front(){
+        if (siz<1){
+            cout<<"error"<<"\n";
+        }
+        else{
+            cout<<a[0]<<"\n";
+        }
+    }
+    void clear(){
+        siz=0;
+        cout<<"ok"<<"\n";
+    }
+    void exit(){
+        cout<<"bye"<<"\n";
+    }
+    
+};
+int main(){
+    Stack st;
+    string type;
+    while (type!="exit"){
+        cin>>type;
+        if (type=="max"){
+            try {
+                cout <<st.max()<<"\n";
+            }
+            catch (...) {
+                cerr << "stack is empty";
+            }
+        }
+        else if (type=="push"){
+            int value;
+            cin>>value;
+            st.push(value);
+        }
+        else if (type=="pop"){
+            st.pop();
+        }
+        else if (type=="front"){
+            st.front();
+        }
+        else if (type=="size"){
+            st.size();
+        }
+        else if (type=="clear"){
+            st.clear();
+        }
+        else if (type=="exit"){
+            st.exit();
+            break;
+        }
+    }
+    return 0;
+}
